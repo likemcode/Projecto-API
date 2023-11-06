@@ -11,7 +11,7 @@ The Projecto API is a RESTful API that allows users to manage projects, tasks, t
 - [Endpoints](#endpoints)
 - [Error Handling](#error-handling)
 - [Contributing](#contributing)
-- [License](#license)
+
 
 ## Installation
 
@@ -100,10 +100,6 @@ If you would like to contribute to the development of the Project Name API, foll
 5. Submit a pull request on GitHub.
 
 Please make sure to follow the existing code style and include tests for your changes.
-
-## License
-
-The Project Name API is open source and released under the [MIT License](https://opensource.org/licenses/MIT).
 
 ## Contact
 

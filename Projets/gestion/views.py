@@ -1,7 +1,7 @@
 from rest_framework import generics, viewsets,status
 from .models import Project, Task, TeamMember, TechnicalDocument, Milestone
 from .serializers import ProjectSerializer, TaskSerializer, TeamMemberSerializer, TechnicalDocumentSerializer, MilestoneSerializer
-from .permissions import IsProjectManager, IsEngineer, IsStakeholder
+from .permissions import IsProjectManager, IsEngineer
 from rest_framework.pagination import PageNumberPagination
 from rest_framework.response import Response
 from rest_framework.permissions import IsAdminUser,IsAuthenticated
@@ -12,7 +12,7 @@ class ProjectViewSet(viewsets.ModelViewSet):
     def get_permissions(self):
         if self.action in ['create', 'update', 'partial_update', 'destroy']:
             # Only project managers can create, update, and delete projects
-            permission_classes = [IsProjectManager,IsAdminUser]
+            permission_classes = [IsAdminUser|IsProjectManager]
         else:
             # All authenticated users can view the list of projects
             permission_classes = [IsAuthenticated]
@@ -62,7 +62,7 @@ class ProjectMilestonesViewset(viewsets.ModelViewSet):
         
         if self.action in ['create', 'update', 'partial_update', 'destroy']:
             # Only project managers can create, update, and delete projects
-            permission_classes = [IsProjectManager,IsAdminUser]
+            permission_classes = [IsProjectManager|IsAdminUser]
         else:
             # All authenticated users can view the list of projects
             permission_classes = [IsAuthenticated]
@@ -86,7 +86,7 @@ class TaskViewSet(viewsets.ModelViewSet):
         
         if self.action in ['create', 'update', 'partial_update', 'destroy']:
             # Only project managers can create, update, and delete projects
-            permission_classes = [IsProjectManager,IsAdminUser]
+            permission_classes = [IsProjectManager|IsAdminUser]
 
         elif self.action in ['update', 'partial_update']:
             permission_classes=[IsEngineer]
@@ -98,7 +98,7 @@ class TaskViewSet(viewsets.ModelViewSet):
 
 class TaskTechnicalDocumentListView(generics.ListCreateAPIView):
     serializer_class = TechnicalDocumentSerializer
-    permission_classes=[IsEngineer,IsProjectManager,IsAdminUser]
+    permission_classes=[IsEngineer|IsProjectManager|IsAdminUser]
     def get_queryset(self):
         task_id = self.kwargs['task_id']
         technical_documents = TechnicalDocument.objects.filter(task_id=task_id)
@@ -133,7 +133,7 @@ class TaskTeamMembersView(generics.ListCreateAPIView):
 class TaskTeamMemberDetailView(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = TeamMemberSerializer
     lookup_field = 'id'
-    permission_classes=[IsEngineer,IsProjectManager,IsAdminUser,IsAuthenticated]
+    permission_classes=[IsEngineer|IsProjectManager|IsAdminUser]
 
     def get_queryset(self):
         task_id = self.kwargs['task_id']
@@ -153,7 +153,7 @@ class TeamMemberViewSet(viewsets.ModelViewSet):
         
         if self.action in ['create', 'update', 'partial_update', 'destroy']:
             # Only project managers can create, update, and delete projects
-            permission_classes = [IsProjectManager,IsEngineer]
+            permission_classes = [IsProjectManager|IsEngineer]
         else:
             # All authenticated users can view the list of projects
             permission_classes = [IsAuthenticated]
