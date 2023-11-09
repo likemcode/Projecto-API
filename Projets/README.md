@@ -18,7 +18,7 @@ The Projecto API is a RESTful API that allows users to manage projects, tasks, t
 To run the Projecto API locally, follow these steps:
 
 1. Clone the repository: `git clone https://github.com/your-repo.git`
-2. Navigate to the project directory: `cd projecto`
+2. Navigate to the project directory: `cd projets`
 3. Install the dependencies: `pip install -r requirements.txt`
 4. Set up the database: `python manage.py migrate`
 5. Start the development server: `python manage.py runserver`
@@ -75,7 +75,6 @@ The Projecto API provides the following endpoints:
 - `PUT /api/projects/{project_id}/tasks/{task_id}/technical-documents/{document_id}/`: Update a specific technical document for a task.
 - `DELETE /api/projects/{project_id}/tasks/{task_id}/technical-documents/{document_id}/`: Delete a specific technical document for a task.
 
-For detailed information on the request and response formats for each endpoint, please refer to the API documentation.
 
 ## Error Handling
 
@@ -91,7 +90,7 @@ Common error codes and their meanings:
 
 ## Contributing
 
-If you would like to contribute to the development of the Project Name API, follow these steps:
+If you would like to contribute to the development of the projecto API, follow these steps:
 
 1. Fork the repository on GitHub.
 2. Create a new branch for your feature or bug fix: `git checkout -b feature/your-feature-name` or `git checkout -b bugfix/your-bug-fix-name`.

@@ -1,0 +1,5 @@
+Django<4.2
+django-rest-framework<3.14
+django_extensions
+factory-boy
+

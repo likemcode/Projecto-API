@@ -39,7 +39,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'rest_framework',
-    'gestion'
+    'rest_framework.authtoken',
+    'gestion',
+    'users',
 ]
 
 MIDDLEWARE = [
@@ -71,6 +73,12 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'projet_dingenierie.wsgi.application'
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication',
+    ],
+}
 
 
 # Database
