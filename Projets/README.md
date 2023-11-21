@@ -11,7 +11,7 @@ The Projecto API is a RESTful API that allows users to manage projects, tasks, t
 - [Endpoints](#endpoints)
 - [Permissions](#Permissions)
 - [Error Handling](#error-handling)
-- [Management Commands](#Management Commands)
+- [Management Commands](#Management-Commands)
 - [Contributing](#contributing)
 
 
