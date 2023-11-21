@@ -9,7 +9,9 @@ The Projecto API is a RESTful API that allows users to manage projects, tasks, t
 - [Usage](#usage)
 - [Authentication](#authentication)
 - [Endpoints](#endpoints)
+- [Permissions](#Permissions)
 - [Error Handling](#error-handling)
+- [Management Commands](#Management Commands)
 - [Contributing](#contributing)
 
 
@@ -35,7 +37,7 @@ Before making requests, make sure to authenticate yourself and obtain an access 
 
 The Projecto API uses token-based authentication. To authenticate yourself and obtain an access token, follow these steps:
 
-1. Send a POST request to `/api/token/` with your username and password in the request body.
+1. Send a POST request to `/api/login/` with your username and password in the request body.
 2. If the credentials are valid, you will receive a response with an access token.
 3. Include the access token in the `Authorization` header of subsequent requests as `Bearer {access_token}`.
 
@@ -75,6 +77,24 @@ The Projecto API provides the following endpoints:
 - `PUT /api/projects/{project_id}/tasks/{task_id}/technical-documents/{document_id}/`: Update a specific technical document for a task.
 - `DELETE /api/projects/{project_id}/tasks/{task_id}/technical-documents/{document_id}/`: Delete a specific technical document for a task.
 
+### Registration
+- `POST /api/register/`: Register a user.
+
+### Authentication
+- `POST /api/login/`: Log in and obtain an access token.
+- `POST /api/logout/`: Log out.
+
+## Permissions
+
+### IsProjectManager
+- Checks if the user is authenticated and belongs to the 'project_managers' group.
+- For object-level permission, allows PUT, PATCH, DELETE requests only if the user is a project manager and is the owner of the project.
+
+### IsEngineer
+- Checks if the user is authenticated and belongs to the 'engineers' group.
+- For object-level permission, allows PUT, PATCH, DELETE requests only if the user is an engineer and is the owner of the task.
+
+The admin can manage user groups ('project_managers', 'engineers') assigning the corresponding permissions to enable users to access endpoints based on their roles.
 
 ## Error Handling
 
@@ -87,6 +107,16 @@ Common error codes and their meanings:
 - 403 Forbidden: The authenticated user does not have permission to access the requested resource.
 - 404 Not Found: The requested resource was not found.
 - 500 Internal Server Error: An unexpected error the server.
+
+## Management Commands
+
+### populate_sample_data.py
+- Use this command to populate the database with sample data.
+- Run: `python manage.py populate_sample_data`
+
+### clear_data.py
+- Use this command to clear the database and remove all existing data.
+- Run: `python manage.py clear_data`
 
 ## Contributing
 
